@@ -1,0 +1,201 @@
+<header class="flex justify-items-center  items-baseline flex-col">
+
+ <p style="letter-spacing: 0.5cm; "    class="w-full text-center   animate-pulse	font-serif p-4  text-2xl   font-bold max-sm:text-base  bg-slate-100/70">The Student Store</p>
+
+
+
+
+</header>
+
+
+
+
+
+
+<!-- header for items  ! -->
+<mat-toolbar class="  mx-auto flex justify-around items-baseline ">
+
+
+        <button *ngIf="login()"  mat-flat-button color="primary" class="animate-bounce" (click)="this.router.navigate(['/user']);">My orders</button>
+
+
+
+
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon [matBadge]='itemsQuantity' [matBadgeHidden]="!itemsQuantity" matBadgeColor="warn"
+            class="mt-2">shopping_cart</mat-icon>
+    </button>
+
+
+    <mat-menu #menu="matMenu">
+        <div class="p-3 ">
+
+            <div class="pb-3 flex justify-between">
+
+                <span class="mr-16">{{itemsQuantity}}</span>
+                <a *ngIf="cart.items.length" class="cursor-pointer " (click)="toggleCart()">
+                    <span class="cursor-pointer font-serif ">viwe Cart </span>
+
+
+                </a>
+                <a *ngIf="!cart.items.length" class="cursor-pointer ">
+
+
+                    <span  class=" font-serif " *ngIf="!cart.items.length">Cart is empty </span>
+                </a>
+            </div>
+
+
+
+
+            <ng-container *ngIf="cart.items.length">
+                <div *ngFor="let item of  cart.items" class="flex justify-between font-light mb-2">
+
+                 <span>  {{item.nameProduct}} x  </span> <span> {{item.quantityProduct}}</span>
+
+                    <span class="font-bold  ">{{ item.priceProduct| currency}}</span>
+
+
+                </div >
+
+
+
+
+
+
+
+
+            </ng-container>
+
+
+
+            <div class="flex justify-between py-3 font-light ">
+
+                Total :
+
+                <span class="font-bold"> {{getTotal(cart.items) | currency }}
+
+
+                </span>
+            </div>
+
+            <div class="pt-3 flex justify-between">
+                <button (click)="onClearCart()" class="bg-rose-600 text-wihte rounded-full w-9 h-9">
+                    <mat-icon>remove_shopping_cart</mat-icon>
+
+                </button>
+
+
+                <button (click)="toggleCart()"  class="bg-green-300 text-wihte rounded-full w-9 h-9">
+                    <mat-icon >shopping_cart</mat-icon>
+
+                </button>
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+
+    </mat-menu>
+
+
+</mat-toolbar>
+
+
+
+<!-- slider for price  -->
+
+<div  *ngIf="!showCart" class="flex justify-around items-center w-auto  m-5  max-[1095px]:flex-col ">
+        <div >
+            <label class="text-center w-80 filterstring m-2 font-serif " > Filter By  Price , Name or Brand </label>
+        <input type="text" class="form-control w-80  filterstring" name="filterstring" [(ngModel)]="filterstring" >
+
+        </div>
+
+
+
+            <div class="flex justify-center items-center flex-col min-w-max  ">
+
+              <ng-container *ngIf="!value">
+                        <label class="text-center font-serif " > Filter By  Price </label>
+
+                      </ng-container>
+
+
+
+                        <ng-container *ngIf="value">
+                       <label  >
+<span class="m-2 font-serif ">Start price</span>{{value | currency}}</label>
+
+                        </ng-container>
+
+
+                        <mat-slider class="sliderBar" min="0" max="100000" step="500" showTickMarks discrete  >
+
+
+                            <input   name="value"   [(ngModel)]="value" matSliderStartThumb>
+                            <input     name="value2"   [(ngModel)]="value2" matSliderEndThumb>
+
+                        </mat-slider>
+
+                        <ng-container *ngIf="value2">
+   <label > <span class="m-2  font-serif ">Until price</span>{{value2 |currency}}</label>
+                        </ng-container>
+
+
+            </div>
+
+
+
+
+
+
+
+</div>
+
+
+<div  class="flex  justify-evenly  items-center flex-col  h-auto mb-8">
+
+
+
+    <app-cart *ngIf="showCart" class=" h-full w-full  m-20
+     bg-slate-100/70 flex items-start  justify-items-center justify-center
+      " id="scrollbar" (onClose)="toggleCart()">
+
+
+    </app-cart>
+
+    <ng-container *ngIf="this.filterByPriceByInput(( this.products$|async),this.value,this.value2,filterstring)?.length===0 "><h1 class="font-bold">No have items for this price </h1></ng-container>
+
+
+    <swiper *ngIf="!showCart" [config]="swiperConfig" [slidesPerView]="3" [spaceBetween]="20" [navigation]="true"
+    [pagination]="{ clickable: true }" [scrollbar]="{ draggable: true }" class="swiper " effect="cube">
+
+      <ng-template swiperSlide *ngFor="let obj of    this.filterByPriceByInput(  ( this.products$|async),this.value,this.value2,this.filterstring)"
+       class="flex justify-center items-center flex-col rounded  shadow-black hover:shadow-indigo-500/40 ">
+
+
+          <h1>{{obj.nameProduct}}</h1>
+          <h2>{{obj.brandProduct}}</h2>
+          <h2>{{obj.priceProduct | currency}}</h2>
+          <img src="{{obj.imgProduct}}" class="h-2/3 w-2/3 rounded">
+
+
+
+          <button (click)="addOnCart(obj)" class="btn btn-outline-danger
+           m-4">Add on Cart</button>
+
+
+
+      </ng-template>
+
+     </swiper>
+
+</div>
+

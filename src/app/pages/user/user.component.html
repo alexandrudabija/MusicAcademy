@@ -1,0 +1,167 @@
+<div id="user" class="w-full h-full flex justify-around p-1 max-[1195px]:flex-col-reverse  max-[1195px]:items-center ">
+
+
+  <div *ngIf="this.user$ | async as obj; "
+    class="personalData w-3/12 h-auto max-[1195px]:w-11/12 max-[1195px]:m-3 bg-stone-200  text-center p-1  ">
+
+
+
+    <h2 class="break-words">Personal Data </h2>
+
+    <div class="max-[1195px]:flex-wrap justify-center w-full">
+
+      <span class="max-md:font-thin mt-2 form-control w-auto h-auto  break-words max-xl:w-44 "> <span>Firstname :</span>
+        {{obj.firstname}}</span>
+      <span class="max-md:font-thin mt-2 form-control w-auto h-auto break-words max-xl:w-6/12 "> <span>Lastname :</span>
+        {{obj.lastname}}</span>
+      <span class=" mt-2 form-control w-auto h-auto break-words max-xl:w-6/12 ">Email <span>{{obj.email}}</span></span>
+      <span class="max-md:font-thin mt-2 form-control w-auto h-auto break-words max-xl:w-6/12 "><span>Country</span>
+        {{obj.country}}</span>
+      <span class="max-md:font-thin mt-2 form-control w-auto h-auto break-words max-xl:w-6/12 ">Date of Registration
+        <span>{{obj.dateRegistration | date }}</span>
+      </span>
+
+    </div>
+
+
+
+    <form [formGroup]="Changesform" class="Change mt-10  w-auto h-auto  flex flex-col ">
+
+      <button class="break-words mt-2" mat-raised-button (click)="togglePassword()"> <span
+          *ngIf="!changePassword">Change Password</span> <span *ngIf="changePassword">cancel</span> </button>
+
+      <input formControlName="oldPassword" *ngIf="changePassword" type="password" class="form-control mt-2 "
+        placeholder="Old Password">
+      <span class="text-red-600	" *ngIf='changePassword&&oldPassword && oldPassword.invalid && oldPassword.touched'>The
+        Password must have more than 4 characters</span>
+      <input formControlName="password" *ngIf="changePassword" type="password" class="form-control mt-2 "
+        placeholder="New Password">
+      <span class="text-red-600	" *ngIf='changePassword&&password && password.invalid && password.touched'>The Password
+        must have more than 4 characters</span>
+
+      <button *ngIf="changePassword" class="break-words mt-2" mat-raised-button color="Warn"
+        (click)="changePassword_email()">Submit</button>
+
+
+
+      <button class="break-words mt-2" mat-raised-button (click)="toggleEmail()"> <span *ngIf="!changeEmail">Change
+          Email </span> <span *ngIf="changeEmail">cancel</span> </button>
+      <input formControlName="email" *ngIf="changeEmail" type="text" placeholder="New Email" class="form-control mt-2 ">
+      <span class="text-red-600	" *ngIf='changeEmail && email && email.invalid && email.touched'>The email is wrong
+      </span>
+
+      <button *ngIf="changeEmail" class="break-words mt-2" mat-raised-button color="Warn"
+        (click)="changePassword_email()">Submit</button>
+
+    </form>
+
+
+
+
+
+
+
+  </div>
+
+
+
+  <div class="  w-full h-full  flex flex-col  justify-items-center items-center   ">
+
+
+
+    <div class=" header flex justify-between items-center max-md:flex-col   w-11/12
+                         bg-stone-300	p-1 ">
+      <h1 class="m-2 form-control text-center w-auto h-auto break-words"> My Account</h1>
+      <h1 class=" m-2 form-control text-center w-auto h-auto break-words"> Number of orders {{(this.orders$ |
+        async)?.length}}</h1>
+      <h1 *ngIf="this.user$| async as obj; " class="m-2 form-control text-center w-auto h-auto break-words"> Customer
+        number: {{obj.idUser}}</h1>
+
+    </div>
+
+
+
+    <div id="scrollbar" class="w-11/12 h-auto flex justify-center   bg-stone-200  ">
+
+
+
+
+
+
+
+
+      <div class="w-11/12 h-fit flex flex-col justify-items-center items-center text-center bg-stone-200 	">
+
+
+        <h1 class="order">Orders</h1>
+        <div *ngFor="let obj of  (this.orders$ | async);"
+          class="m-10  h-96 w-full flex  min-[1130px]:flex-row   max-md:flex-col items-center  justify-around  form-control ">
+
+
+
+
+          <p class="w-auto h-auto break-words"> <span class="form-control  mb-4 order break-words">Order number</span>
+            {{obj.idOrder}} </p>
+
+          <p class="w-auto h-auto break-words"><span class="form-control  mb-4 break-words">Date</span>
+            {{obj.payment.dateOrder | date:'medium' }}</p>
+          <p class="w-auto h-auto break-words"><span
+              class="form-control  mb-4 break-words">Quantity</span>{{countQty(obj.items)}} <span>Articles</span></p>
+
+
+
+          <p class="w-auto h-auto break-words"><span class="form-control  mb-4 break-words">Amount</span>
+            {{obj.payment.total | currency}} </p>
+
+
+          <hr>
+
+          <div id="scrollbar" class=" w-4/12 max-md:w-auto  flex flex-col items-center justify-center">
+
+            <div class="h-80 flex flex-col items-center mt-4 ">
+
+              <div *ngFor="let item of obj.items"
+                class=" mt-24 mb-1  w-auto   flex flex-col items-center justify-center ">
+                <img src="{{item.imgProduct}}" class="w-6/12 h-8/12 max-md:w-4/12  max-md:h-4/12  rounded">
+
+                <h6> {{item.nameProduct}}</h6>
+                <h6><span>Brand :</span> {{item.brandProduct}}</h6>
+                <h6><span>Price:</span> {{item.priceProduct |currency}}</h6>
+                <h6><span>Quantity :</span> {{item.quantityProduct}}</h6>
+
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+
+        <!-- <mat-spinner #loading></mat-spinner> -->
+        <ng-container *ngIf="(this.orders$ | async)?.length===0">
+
+          <div>
+            <p class="text-center">You don't have orders </p>
+          </div>
+        </ng-container>
+
+
+
+
+
+
+      </div>
+
+
+    </div>
+
+
+
+  </div>
+
+
+</div>

@@ -1,0 +1,43 @@
+
+
+ <p style="letter-spacing: 0.3cm;"  class="title  animate-pulse max-[280px]:top-5   max-[280px]:relative    text-center font-serif p-4  text-2xl   w-full font-bold max-sm:text-sm  bg-slate-100/50  ">Welcome To Music Academy</p>
+
+<button mat-button color="warn" id="mute" (click)="soundOn()">
+  <mat-icon >{{ volume === 0 ? 'volume_off' : 'volume_up' }}</mat-icon>
+</button>
+<video id="bg-video" autoplay loop muted>
+  <source src="assets/index.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+  <div class="header flex  justify-between items-center  ">
+
+
+
+
+  <div class=" w-2/6 flex justify-center m-4   max-[895px]:w-full max-[895px]:relative max-[895px]:top-12 max-[678px]:top-64 max-[280px]:top-80  max-[377px]:top-80">
+    <p class="  bg-slate-100/70 w-full max-[1007px]:text-xs   text-center  text-lg font-serif	 leading-loose p-2 max-[1630px]:text-sm   max-[787px]:bg-slate-100/90   "> {{text1}}</p></div>
+
+    <div class=" w-2/6     m-4   	flex items-center justify-center  max-[895px]:hidden ">
+        <p class="bg-slate-100/70 max-[1007px]:text-xs  w-full text-center text-lg font-serif tracking-wide leading-loose p-2 max-[1630px]:text-sm  max-[787px]:bg-slate-100/90 "> {{text2}}</p></div>
+
+
+
+
+
+
+
+  </div>
+
+<main class="flex justify-center max-[685px]:items-center ">
+
+  <div class=" w-4/6  h-1/5 mt-6  flex items-center justify-center max-[685px]:w-11/12 max-[377px]:mt-60   ">
+    <p class="   w-full h-auto text-center text-base font-sans	tracking-wide p-2 bg-slate-100/70  max-[1091px]:text-sm max-[887px]:text-xs max-[787px]:bg-slate-100/90  ">{{text3}} </p>
+
+  </div>
+
+</main>
+
+
+<app-navbar2 class="w-full" ></app-navbar2>
+

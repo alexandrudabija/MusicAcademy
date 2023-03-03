@@ -1,0 +1,36 @@
+<form [formGroup]="UserForm!" (submit)="this.postUser();" >
+
+<p class="text-center w-full   p-4  text-2xl  max-sm:text-base" style="font-family: cursive;"  >CREATE A NEW ACCOUNT</p>
+
+
+<label   >Firstname</label>
+    <input formControlName="firstname"  type="text" >
+    <span class="text-red-600	" *ngIf='firstname && firstname.invalid && firstname.touched'>The Firstname must have more than 2 characters
+    </span>
+
+    <label   >Lastname</label>
+    <input  formControlName="lastname"  type="text" >
+    <span class="text-red-600	" *ngIf='lastname && lastname.invalid && lastname.touched'>The Lastname must have more than 2 characters</span>
+
+    <label >Password</label>
+    <input formControlName="password"  type="password" type="password" >
+    <span class="text-red-600	" *ngIf='password && password.invalid && password.touched'>The Password must have more than 4 characters</span>
+
+    <label >Email</label>
+    <input formControlName="email"  type="email">
+    <span class="text-red-600	" *ngIf='email && email.invalid && email.touched  '>This email  is not valid</span>
+
+    <!-- <label >Age</label>
+    <input formControlName="yearOfBirth"    type="date" >
+    <span class="text-red-600	" *ngIf='yearOfBirth && age.invalid && yearOfBirth.touched  '>This Age  is not valid</span> -->
+
+    <label >Country</label>
+    <input formControlName="country"  type="text" >
+    <span class="text-red-600	" *ngIf='country && country.invalid && country.touched  '>The Country must have more than 3 characters</span>
+
+
+
+
+    <button  [disabled]="!UserForm.valid" mat-raised-button >Register</button>
+</form>
+

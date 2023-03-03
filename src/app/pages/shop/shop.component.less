@@ -1,0 +1,120 @@
+@import 'swiper/less';
+@import 'swiper/less/navigation';
+@import 'swiper/less/pagination';
+
+
+
+
+header {
+
+    background-image: url(../../../assets/photos/storeBackground.jpg);
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+}
+
+
+
+
+.slider-card {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+flex-direction: column;
+border-radius: 10px;
+    height: 600px;
+    width: 467px !important;
+    background: rgb(255, 255, 255);
+ 
+    box-shadow: 5px 5px 5px 5px black;
+
+}
+
+.slider-card:hover {
+    box-shadow: 5px 5px 5px 5px rgb(223, 12, 12);
+}
+
+.swiper 
+{
+    display: flex;
+justify-content: center;
+align-items: center;
+height:760px;
+width: 100%;
+}
+
+@media only screen and (max-width:800px)
+{
+    .slider-card {
+
+        width: 367px !important;
+
+    }
+}
+
+
+  .sliderBar{
+
+    width: 450px !important;
+
+  }
+@media only screen and (max-width:1095px)
+{
+      .sliderBar{
+
+          width: 337px !important;
+
+      }
+}
+
+@media only screen and (max-width:280px)
+{
+        .sliderBar{
+
+            width: 230px !important;
+
+        }
+        .filterstring{
+
+        width: 230px !important;
+
+        }
+}
+
+
+
+
+
+
+
+#scrollbar{
+    // overflow-x: auto ;  
+      overflow-y:scroll;
+     scroll-behavior :smooth;
+   
+
+}
+
+
+::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(150, 145, 146); 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(183, 172, 173); 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(157, 152, 153); 
+  }

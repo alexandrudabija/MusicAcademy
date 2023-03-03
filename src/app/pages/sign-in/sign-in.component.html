@@ -1,0 +1,29 @@
+
+
+<form [formGroup]="UserForm" (ngSubmit)="this.login(this.UserForm.value)" class="h-full" >
+<p class="text-center w-full p-4  text-2xl  max-sm:text-base" style="font-family: cursive;"  >Sign In</p>
+
+
+<label for="email">Email address</label>
+
+<input formControlName="email" type="email">
+<ng-container *ngIf='email && email.invalid && email.touched  '>
+  <span class="text-red-600	" >This input filed is not valid</span>
+</ng-container>
+
+
+
+<label for="password">Password</label>
+<input  formControlName="password" type="password">
+
+
+<ng-container *ngIf='password && password.invalid && password.touched  '>
+
+<span class="text-red-600	" >This input filed is not valid</span>
+</ng-container>
+
+
+
+
+<button mat-raised-button  [disabled]="UserForm.invalid"    >Sign in to account  </button>
+</form>

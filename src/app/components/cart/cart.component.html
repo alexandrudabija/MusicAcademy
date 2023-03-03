@@ -1,0 +1,168 @@
+
+
+<mat-card  class="w-full max-w-7x1 mx-auto "
+  *ngIf="this.dataSource.length" >
+
+    <table mat-table [dataSource]="dataSource"
+    class="mat-elevetation-z8 w-full  text-center"  >
+
+                <ng-container matColumnDef="imgProduct">
+                    <!-- matHeaderCellDef for header cell  -->
+                    <th mat-header-cell *matHeaderCellDef class="text-center">Product</th>
+
+                            <td mat-cell *matCellDef="let element" class="flex justify-center items-center">
+                              <img src="{{element.imgProduct}}" alt="img"  class="w-[100px] my-5">
+                            </td>
+
+                   <td mat-footer-cell *matFooterCellDef>
+
+                </td>
+
+                </ng-container>
+
+
+
+
+
+                <ng-container matColumnDef="nameProduct">
+
+                        <th mat-header-cell *matHeaderCellDef class="text-center">Name</th>
+
+                                <td mat-cell *matCellDef="let element" class="text-center">
+
+                                    <span class="truncate max-w-xs block">{{  element.nameProduct}}</span>
+                                </td>
+                        <td mat-footer-cell *matFooterCellDef class="text-center">
+                            <button mat-raised-button
+                            (click)="toggle()">Continue  Shopping</button> </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="brandProduct">
+
+                    <th mat-header-cell *matHeaderCellDef class="text-center">Brand</th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center">
+
+                        <span class="truncate max-w-xs">{{  element.brandProduct}}</span>
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>  </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="priceProduct">
+
+                    <th mat-header-cell *matHeaderCellDef class="text-center">Price</th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center">
+
+                        {{  element.priceProduct |currency}}
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>  </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="quantityProduct">
+
+                    <th mat-header-cell *matHeaderCellDef class="text-center">Quantity</th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center">
+
+
+                       <div class="flex justify-center items-center">
+
+                           <button          (click)="removeQuantity(element)"
+                           mat-icon-button class="text-center">
+                                <mat-icon>remove</mat-icon>
+
+                                </button>
+                                <span class="truncate max-w-xs text-center"> {{  element.quantityProduct }}  </span>
+
+
+                                <button
+                                (click)="onAddQuantity(element)"
+                                mat-icon-button class="text-center">
+                                    <mat-icon class="text-center">add</mat-icon>
+
+                                    </button>
+                       </div>
+                           <!-- matFooterCellDef for footer cell  -->
+
+                    </td>
+                    <td mat-footer-cell *matFooterCellDef>  </td>
+                </ng-container>
+
+
+
+                <ng-container matColumnDef="total">
+
+                    <th mat-header-cell *matHeaderCellDef class="text-center">Total</th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center">
+
+                        {{  element.quantityProduct * element.priceProduct |currency }}
+                    </td>
+
+                        <!-- matFooterCellDef for footer cell  -->
+                    <td mat-footer-cell *matFooterCellDef class="text-center">
+                        <span class="font-bold py-5 block ">  {{ getTotal(dataSource) |currency}}</span>
+
+                    </td>
+                </ng-container>
+
+
+
+
+
+
+                <ng-container matColumnDef="action">
+
+                    <th mat-header-cell *matHeaderCellDef class="text-center">
+                        <button  (click)="onClearCart()"
+                        mat-raised-button color="warn" class="text-center">Clear All</button>
+
+                        </th>
+
+                    <td mat-cell *matCellDef="let element" class="text-center">
+
+                        <button (click)="removeOneItem(element)"
+
+                        mat-mini-fab color="warn">
+
+                        <mat-icon class="text-center">close</mat-icon>
+                         </button>
+
+                    </td>
+                        <!-- matFooterCellDef for footer cell  -->
+                    <td mat-footer-cell *matFooterCellDef class="text-center">
+                       <button
+                       (click)="onCheckout()"
+                       mat-raised-button color="primary" class="animate-bounce	">
+
+                       Proceed To Checkout
+                       </button>
+                    </td>
+                </ng-container>
+
+
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns:displayedColumns" ></tr>
+
+                            <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+
+    </table>
+
+
+</mat-card>
+
+
+<mat-card  *ngIf="!this.dataSource.length" class="h-2/3 w-full flex justify-center  items-center" >
+
+<p>Yuo don't have items in cart !</p>
+<button mat-raised-button   class="m-3"   (click)="toggle()">Start Shopping</button>
+</mat-card>
+
+

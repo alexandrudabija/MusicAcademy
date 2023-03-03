@@ -1,0 +1,31 @@
+<nav class="sticky  w-full  font-serif  text-2xl font-bold max-sm:text-base
+max-md:h-56 h-20
+grid items-center justify-around grid-flow-col
+max-sm:grid-rows-3
+max-xl:grid-rows-2">
+
+
+
+ <button class=" font-serif "  style="letter-spacing: 0.1cm; " class="" routerLink="/index" routerLinkActive="active">Home</button>
+
+ <button  style="letter-spacing: 0.1cm; " routerLink="/academy" routerLinkActive="active">Academy</button>
+ <button style="letter-spacing: 0.1cm; " routerLink="/courses" routerLinkActive="active">Courses</button>
+ <button style="letter-spacing: 0.1cm; " routerLink="/studio" routerLinkActive="active">Studio</button>
+
+
+<button style="letter-spacing: 0.1cm; " routerLink="/campus" routerLinkActive="active">Campus</button>
+<button style="letter-spacing: 0.1cm; " routerLink="/shop" routerLinkActive="active">Music Shop</button>
+
+
+
+    <button style="letter-spacing: 0.1cm; " *ngIf="!login()"    routerLinkActive="active" routerLink="/signIn">Sign in </button>
+<button style="letter-spacing: 0.1cm; "  *ngIf="!login()" routerLinkActive="active" routerLink="/signUp">Sign up </button>
+
+<button style="letter-spacing: 0.1cm; "  *ngIf="login()" routerLinkActive="active" routerLink="/user">My account   </button>
+<button style="letter-spacing: 0.1cm; " *ngIf="login()" routerLinkActive="active" (click)="logout()" >Logout   </button>
+
+
+
+
+</nav>
+

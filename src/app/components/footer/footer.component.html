@@ -1,0 +1,20 @@
+<footer class="bg-neutral-900 mt-1	h-64 w-full  text-lime-50  flex items-center justify-around font-serif   text-lg   font-bold max-sm:text-xs">
+<div class="contacts flex flex-col ">
+<span><span>Phone : </span>{{this.footerObj.phone}}</span>
+ <span>{{this.footerObj.address}}</span>
+ <span>Created by Alexandru Dabija</span>
+ <span>Copyright © 2023.</span>
+</div>
+
+
+<div class="openTime flex-col flex justify-center items-center">
+    <span >Opening time</span>
+<div class="flex justify-center items-center  flex-col" *ngFor="let item of footerarray">
+<span>{{item}}</span>
+
+</div>
+
+
+</div>
+
+</footer>

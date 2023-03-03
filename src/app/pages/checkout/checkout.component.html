@@ -1,0 +1,149 @@
+
+<ng-container>
+
+
+
+
+<div *ngIf="this.payment===false"   class="flex w-full justify-items-center items-center  max-[375px]:flex-col ">
+
+
+
+  <div class=" w-full  ">
+
+    <div id="scrollbar" style="height: 600px ;"
+      class=" flex items-end justify-items-center flex-col   max-[600px]:p-2  p-24 w-full   ">
+
+      <div class="w-7/12 max-[1183px]:w-full  flex items-start justify-items-center flex-col">
+        <button class="mt-4 mb-4" mat-raised-button (click)="back()"> Back To Shop </button>
+        <h3>Pay MusicSchool</h3>
+        <h1 class="font-bold "> {{this.CartService.getTotal(this.cartCheckout.items)|currency}}</h1>
+      </div>
+      <div class=" w-7/12  max-[1183px]:w-full max-[792px]:flex-col  mt-2 mb-2 flex items-center justify-between"
+        *ngFor="let item of cartCheckout.items ">
+
+        <div class="flex items-center max-[792px]:flex-col">
+          <img src="{{item.imgProduct}}" class="h-16 w-16 rounded">
+          <div class="m-2 flex flex-col">
+            <small class="font-bold">{{item.nameProduct}}</small>
+            <small class="text-muted">Qty.{{item.quantityProduct}}</small>
+          </div>
+
+        </div>
+
+        <div class="flex  justify-items-end items-end flex-col">
+          <small class="font-bold" *ngIf="item.quantityProduct>1">Total
+            {{item.quantityProduct*item.priceProduct|currency }}</small>
+
+          <small class="text-muted">{{item.priceProduct |currency}} <span> </span> </small>
+        </div>
+
+      </div>
+      <hr class="rounded  w-7/12 max-[1183px]:w-full  bg-slate-300">
+      <div class="w-7/12 max-[1183px]:w-full   flex justify-between ">
+        <span class="font-bold ">SubTotal</span>
+        <span class="font-bold "> {{this.CartService.getTotal(this.cartCheckout.items)|currency}}</span>
+
+      </div>
+
+      <div class="w-7/12 max-[1183px]:w-full  flex justify-between mt-4 mb-4 ">
+
+        <div class="flex flex-col">
+          <span class=" text-muted">Shipping </span>
+          <span class=" text-muted">Free shipping (5-works days)</span>
+        </div>
+        <span class=" text-muted"> Free Shipping</span>
+
+      </div>
+
+      <hr class="rounded  w-7/12 max-[1183px]:w-full  bg-slate-300">
+      <div class="w-7/12 max-[1183px]:w-full  flex justify-between ">
+        <span class="font-bold ">Total</span>
+        <span class="font-bold "> {{this.CartService.getTotal(this.cartCheckout.items)|currency}}</span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class=" w-full h-full ">
+
+    <form [formGroup]="OrderForm" (ngSubmit)="createOrder()"
+      class=" w-full h-full  p-2 flex items-center flex-col max-[792px]:flex-col ">
+      <label class="font-bold w-6/12 max-[600px]:w-[185px] mb-4">Shipping information
+      </label>
+      <!-- User -->
+      <div [formGroupName]="'user'" class=" w-full flex items-center flex-col max-[792px]:flex-col ">
+        <label class="w-6/12 max-[600px]:w-[185px]" for="email">E-mail</label>
+        <input [formControlName]="'email'" class="form-control  w-6/12 max-[600px]:w-[185px]" type="text">
+
+        <label class="mt-4 w-6/12 max-[600px]:w-[185px] "> Delivery address</label>
+        <input [formControlName]="'firstname'" class="form-control max-[600px]:w-[185px] w-6/12 mt-2" type="text"
+          placeholder="Firstname">
+        <input [formControlName]="'lastname'" class="form-control max-[600px]:w-[185px] w-6/12 mt-2" type="text"
+          placeholder="Lastname">
+        <!-- Delivery address -->
+      </div>
+      <div [formGroupName]="'address'" class="w-full  flex items-center flex-col max-[792px]:flex-col ">
+        <input [formControlName]="'country'" class="form-control max-[600px]:w-[185px] w-6/12 mt-2" type="text"
+          placeholder="Country">
+        <input [formControlName]="'street'" class="form-control  max-[600px]:w-[185px] w-6/12 mt-2" type="text"
+          placeholder="Street">
+
+        <div class="flex justify-items-cente max-[600px]:w-[185px] w-6/12">
+
+          <input [formControlName]="'zipcode'" class="form-control  mt-2" type="text" placeholder="Zip code">
+          <input [formControlName]="'city'" class="form-control  mt-2" type="text" placeholder="City">
+
+        </div>
+      </div>
+
+      <br>
+
+      <!-- Payment -->
+      <div [formGroupName]="'payment'" class=" w-full flex items-center flex-col max-[792px]:flex-col  ">
+
+        <div [formGroupName]="'paymentMethod'" class=" w-full flex items-center flex-col max-[792px]:flex-col  ">
+
+          <div [formGroupName]="'card_Visa_Mastercard'"
+            class=" w-full flex items-center flex-col max-[792px]:flex-col  ">
+
+            <label class="font-bold w-6/12 max-[600px]:w-[185px] ">Payment details</label>
+            <label class="w-6/12 max-[600px]:w-[185px] mt-4 ">Card data</label>
+            <input [formControlName]="'numberCard'" class="form-control  w-6/12 max-[600px]:w-[185px] mt-2" type="text"
+              placeholder="1234 1234 1234 1234 ">
+
+            <div class="flex justify-items-center max-[600px]:w-[185px] w-6/12">
+              <input [formControlName]="'ll_aa'" class="form-control mt-2 " type="text" placeholder="LL/AA">
+              <input [formControlName]="'cvc'" class="form-control  mt-2" type="text" placeholder="CVC">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <button mat-flat-button color="primary" type="submit" class="max-[600px]:w-[185px] w-6/12  mt-4 "
+        [disabled]="!OrderForm.valid">Pay</button>
+    </form>
+
+
+  </div>
+
+</div>
+
+</ng-container>
+
+
+<ng-container  *ngIf="payment">
+
+<div class="absolute h-full w-full  bg-neutral-100  flex items-center justify-center flex-col 	">
+
+  <h1 class="text-center">You Have Successfully Pay order ! Number order : {{orderId }} </h1>
+  <button class="mt-4 mb-4 animate-bounce" mat-raised-button (click)="back()"> Back To Shop </button>
+</div>
+
+</ng-container>
+

@@ -1,0 +1,56 @@
+
+
+*{box-sizing: border-box;}
+
+
+
+
+@white : (#ffffff);
+
+nav
+{
+z-index: 1;
+    background: fade(@white, 100%);
+
+
+}
+
+nav button {
+
+    text-decoration: none;
+    transition-duration: 0.3s;
+
+}
+
+nav button:hover {
+    color: aliceblue;
+    transition-duration: 0.3s;
+    background-color: rgb(190, 130, 0);
+   padding: 19px;
+
+}
+
+.active
+{
+   color: aliceblue;
+    transition-duration: 0.3s;
+    background-color: rgb(190, 130, 0);
+   padding: 15px;
+
+}
+
+@media only screen and (max-width:1287px)
+{
+
+    nav button:hover {
+        color: aliceblue;
+        transition-duration: 0.3s;
+        background-color: rgb(190, 130, 0);
+       padding: 3px !important;
+
+    }
+
+
+}
+
+
